@@ -19,11 +19,36 @@ scroll-behavior:smooth;
 }
 
 body{
-background:#f6faf7;
+background:linear-gradient(-45deg,#f6faf7,#e8f5e9,#ffffff,#e0f2f1);
+background-size:400% 400%;
+animation:bgMove 18s ease infinite;
 color:#333;
 }
 
+@keyframes bgMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
 /* NAVBAR */
+#particles{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:0;
+}
+
+.hero{
+position:relative;
+overflow:hidden;
+}
+
+.hero-box{
+position:relative;
+z-index:2;
+}
 
 header{
 position:fixed;
@@ -40,6 +65,35 @@ z-index:999;
 }
 
 /* FLOATING DONATE BUTTON */
+.hero h1{
+font-size:60px;
+animation:heroFade 1.2s ease;
+}
+
+.hero p{
+animation:heroFade 1.8s ease;
+}
+
+@keyframes heroFade{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.cursor-glow{
+position:fixed;
+width:300px;
+height:300px;
+background:radial-gradient(circle,rgba(67,160,71,0.25) 0%,transparent 60%);
+pointer-events:none;
+transform:translate(-50%,-50%);
+z-index:0;
+}
 
 .floating-donate{
 position:fixed;
@@ -82,7 +136,7 @@ color:#2e7d32;
 
 .hero{
 height:100vh;
-background:url("https://images.unsplash.com/photo-1588072432836-e10032774350") center/cover fixed;
+background:url("https://images.pexels.com/photos/3231359/pexels-photo-3231359.jpeg") center/cover fixed;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -91,9 +145,12 @@ color:white;
 }
 
 .hero-box{
-background:rgba(0,0,0,0.55);
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.2);
+backdrop-filter:blur(18px);
 padding:70px;
-border-radius:20px;
+border-radius:25px;
+box-shadow:0 30px 60px rgba(0,0,0,0.25);
 }
 
 .hero h1{
@@ -137,8 +194,9 @@ box-shadow:0 10px 25px rgba(0,0,0,0.05);
 transition:.3s;
 }
 
-.team-card:hover{
-transform:translateY(-8px);
+.card:hover{
+transform:translateY(-12px) scale(1.03);
+box-shadow:0 25px 60px rgba(0,0,0,0.18);
 }
 
 .team-card img{
@@ -330,6 +388,7 @@ padding:25px;
 </head>
 
 <body>
+<div class="cursor-glow"></div>
 
 <header>
 <div class="logo">Udaan NGO</div>
@@ -346,6 +405,8 @@ padding:25px;
 <!-- HERO -->
 
 <section class="hero">
+
+<div id="particles"></div>
 
 <div class="hero-box">
 <h1>Udaan NGO</h1>
@@ -625,5 +686,85 @@ window.addEventListener("scroll", revealSections);
 
 </script>
 <a href="#contact" class="floating-donate">💚 Donate</a>
+<script>
+
+const cards = document.querySelectorAll(".team-card");
+
+cards.forEach(card => {
+
+card.addEventListener("mousemove",(e)=>{
+
+const rect = card.getBoundingClientRect();
+const x = e.clientX - rect.left;
+const y = e.clientY - rect.top;
+
+const centerX = rect.width/2;
+const centerY = rect.height/2;
+
+const rotateX = (y-centerY)/12;
+const rotateY = (centerX-x)/12;
+
+card.style.transform=`rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+
+});
+
+card.addEventListener("mouseleave",()=>{
+card.style.transform="rotateX(0) rotateY(0)";
+});
+
+});
+
+</script>
+<script>
+
+const glow=document.querySelector(".cursor-glow");
+
+document.addEventListener("mousemove",(e)=>{
+glow.style.left=e.clientX+"px";
+glow.style.top=e.clientY+"px";
+});
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<script>
+
+tsParticles.load("particles",{
+
+particles:{
+
+number:{
+value:70
+},
+
+color:{
+value:"#43a047"
+},
+
+shape:{
+type:"circle"
+},
+
+opacity:{
+value:0.6
+},
+
+size:{
+value:{min:2,max:6}
+},
+
+move:{
+enable:true,
+speed:1
+}
+
+},
+
+background:{
+color:"transparent"
+}
+
+});
+
+</script>
 </body>
 </html>
