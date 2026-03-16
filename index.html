@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Udaan NGO</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#f6faf7;
+color:#333;
+}
+
+/* NAVBAR */
+
+header{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 8%;
+background:rgba(255,255,255,0.8);
+backdrop-filter:blur(10px);
+box-shadow:0 4px 15px rgba(0,0,0,0.05);
+z-index:999;
+}
+
+/* FLOATING DONATE BUTTON */
+
+.floating-donate{
+position:fixed;
+right:25px;
+bottom:25px;
+background:#43a047;
+color:white;
+padding:14px 22px;
+border-radius:40px;
+font-weight:600;
+text-decoration:none;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+z-index:999;
+transition:0.3s;
+}
+
+.floating-donate:hover{
+background:#2e7d32;
+transform:scale(1.05);
+}
+  
+.logo{
+font-size:22px;
+font-weight:700;
+color:#2e7d32;
+}
+
+nav a{
+margin-left:25px;
+text-decoration:none;
+color:#444;
+font-weight:500;
+}
+
+nav a:hover{
+color:#2e7d32;
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+background:url("https://images.unsplash.com/photo-1588072432836-e10032774350") center/cover fixed;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+}
+
+.hero-box{
+background:rgba(0,0,0,0.55);
+padding:70px;
+border-radius:20px;
+}
+
+.hero h1{
+font-size:60px;
+}
+
+.hero p{
+margin-top:10px;
+font-size:20px;
+}
+
+/* SCROLL ANIMATION */
+
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:all 0.8s ease;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+/* TEAM SECTION */
+
+.team-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+max-width:1000px;
+margin:auto;
+}
+
+.team-card{
+background:white;
+padding:25px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+transition:.3s;
+}
+
+.team-card:hover{
+transform:translateY(-8px);
+}
+
+.team-card img{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+margin-bottom:15px;
+}
+
+.team-card h3{
+color:#2e7d32;
+margin-bottom:5px;
+}
+
+.team-card p{
+font-size:14px;
+color:#666;
+}
+
+.btn{
+margin-top:25px;
+display:inline-block;
+background:#43a047;
+padding:14px 32px;
+border-radius:30px;
+color:white;
+text-decoration:none;
+font-weight:600;
+}
+
+/* SECTIONS */
+
+section{
+padding:100px 10%;
+}
+
+.section-title{
+text-align:center;
+font-size:36px;
+color:#2e7d32;
+margin-bottom:50px;
+}
+
+/* GLASS CARDS */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.card{
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(6px);
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+/* IMPACT */
+
+.impact{
+background:#e8f5e9;
+border-radius:20px;
+padding:70px;
+text-align:center;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:40px;
+margin-top:40px;
+}
+
+.stat h2{
+font-size:44px;
+color:#2e7d32;
+}
+
+/* TIMELINE */
+
+.timeline{
+max-width:800px;
+margin:auto;
+}
+
+.timeline-item{
+border-left:4px solid #43a047;
+padding-left:20px;
+margin-bottom:30px;
+}
+
+.timeline-item h3{
+color:#2e7d32;
+}
+
+/* GALLERY */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+
+.gallery img{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:12px;
+transition:.4s;
+}
+
+.gallery img:hover{
+transform:scale(1.05);
+}
+
+/* PARTNER SLIDER */
+
+.slider{
+overflow:hidden;
+white-space:nowrap;
+position:relative;
+}
+
+.slider-track{
+display:inline-block;
+animation:slide 18s linear infinite;
+}
+
+.slider img{
+height:60px;
+margin:0 40px;
+opacity:0.8;
+}
+
+@keyframes slide{
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
+}
+
+/* FORM */
+
+.form-box{
+max-width:600px;
+margin:auto;
+background:white;
+padding:35px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+.form-box input,
+.form-box textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ddd;
+}
+
+.form-box button{
+margin-top:15px;
+width:100%;
+padding:12px;
+background:#43a047;
+color:white;
+border:none;
+border-radius:25px;
+font-weight:600;
+}
+
+/* FOOTER */
+
+footer{
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:25px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">Udaan NGO</div>
+<nav>
+<a href="#about">About</a>
+<a href="#impact">Impact</a>
+<a href="#history">History</a>
+<a href="#gallery">Gallery</a>
+<a href="#team">Team</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-box">
+<h1>Udaan NGO</h1>
+<p>Together, We Make a Difference</p>
+<p>Empowering children through education</p>
+<a href="#contact" class="btn">Donate Now</a>
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section id="about" class="reveal">
+
+<h2 class="section-title">About Us</h2>
+
+<p style="text-align:center;max-width:800px;margin:auto;">
+Udaan NGO works to provide quality education and opportunities to underprivileged children.
+Through community support and volunteer programs, we help children gain knowledge,
+confidence and a brighter future.
+</p>
+
+</section>
+<section id="programs" class="reveal">
+
+<h2 class="section-title">Our Programs</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>📚 Education Support</h3>
+<p>
+Providing books, tutoring and study materials for children who lack access to educational resources.
+</p>
+</div>
+
+<div class="card">
+<h3>🎓 School Assistance</h3>
+<p>
+Helping families with school fees, uniforms and essential learning supplies.
+</p>
+</div>
+
+<div class="card">
+<h3>🌍 Community Awareness</h3>
+<p>
+Running awareness campaigns that promote the importance of education in communities.
+</p>
+</div>
+
+<div class="card">
+<h3>🤝 Volunteer Programs</h3>
+<p>
+Engaging volunteers to mentor, teach and support students through learning programs.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- IMPACT -->
+
+<section id="impact" class="reveal">
+
+<div class="impact">
+
+<h2 class="section-title">Our Impact</h2>
+
+<div class="stats">
+
+<div class="stat">
+<h2 id="students">0</h2>
+<p>Students Helped</p>
+</div>
+
+<div class="stat">
+<h2 id="volunteers">0</h2>
+<p>Volunteers</p>
+</div>
+
+<div class="stat">
+<h2 id="schools">0</h2>
+<p>Partner Schools</p>
+</div>
+
+<div class="stat">
+<h2 id="programsCount">0</h2>
+<p>Programs</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- TIMELINE -->
+
+<section id="history" class="reveal">
+
+<h2 class="section-title">Our Journey</h2>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<h3>2020</h3>
+<p>Udaan NGO founded to support children's education.</p>
+</div>
+
+<div class="timeline-item">
+<h3>2023</h3>
+<p>Programs expanded and more communities reached.</p>
+</div>
+
+<div class="timeline-item">
+<h3>2025</h3>
+<p>Continuing to grow and help more students.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- GALLERY -->
+
+<section id="gallery" class="reveal">
+
+<h2 class="section-title">Gallery</h2>
+
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1509062522246-3755977927d7">
+<img src="https://images.unsplash.com/photo-1588072432836-e10032774350">
+<img src="https://images.unsplash.com/photo-1577896851231-70ef18881754">
+<img src="https://images.unsplash.com/photo-1529390079861-591de354faf5">
+
+</div>
+
+</section>
+<!-- TEAM -->
+
+<section id="team" class="reveal">
+
+<h2 class="section-title">Our Team</h2>
+
+<div class="team-grid">
+
+<div class="team-card">
+<img src="https://randomuser.me/api/portraits/men/32.jpg">
+<h3>Rahul Sharma</h3>
+<p>Founder & Director</p>
+</div>
+
+<div class="team-card">
+<img src="https://randomuser.me/api/portraits/women/44.jpg">
+<h3>Ananya Singh</h3>
+<p>Education Program Lead</p>
+</div>
+
+<div class="team-card">
+<img src="https://randomuser.me/api/portraits/men/55.jpg">
+<h3>Vikram Patel</h3>
+<p>Community Coordinator</p>
+</div>
+
+<div class="team-card">
+<img src="https://randomuser.me/api/portraits/women/65.jpg">
+<h3>Pooja Verma</h3>
+<p>Volunteer Manager</p>
+</div>
+
+</div>
+
+</section>
+<!-- PARTNERS -->
+
+<section>
+
+<h2 class="section-title">Partners & Supporters</h2>
+
+<div class="slider">
+
+<div class="slider-track">
+
+<img src="https://dummyimage.com/120x60/ccc/000.png&text=NGO">
+<img src="https://dummyimage.com/120x60/ccc/000.png&text=Govt">
+<img src="https://dummyimage.com/120x60/ccc/000.png&text=Donor">
+<img src="https://dummyimage.com/120x60/ccc/000.png&text=Community">
+<img src="https://dummyimage.com/120x60/ccc/000.png&text=Volunteer">
+
+<img src="https://dummyimage.com/120x60/ccc/000.png&text=NGO">
+<img src="https://dummyimage.com/120x60/ccc/000.png&text=Govt">
+<img src="https://dummyimage.com/120x60/ccc/000.png&text=Donor">
+<img src="https://dummyimage.com/120x60/ccc/000.png&text=Community">
+<img src="https://dummyimage.com/120x60/ccc/000.png&text=Volunteer">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<h2 class="section-title">Contact</h2>
+
+<div class="form-box">
+
+<input placeholder="Your Name">
+<input placeholder="Email">
+<textarea rows="4" placeholder="Message"></textarea>
+
+<button>Send Message</button>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 Udaan NGO — Together We Make a Difference</p>
+
+</footer>
+
+<script>
+
+function animate(id,target){
+
+let count=0
+let speed=target/100
+
+let interval=setInterval(()=>{
+
+count+=speed
+
+if(count>=target){
+count=target
+clearInterval(interval)
+}
+
+document.getElementById(id).innerText=Math.floor(count)
+
+},20)
+
+}
+
+animate("students",850)
+animate("volunteers",120)
+animate("schools",25)
+animate("programsCount",15)
+
+</script>
+<script>
+
+function revealSections(){
+
+let reveals = document.querySelectorAll(".reveal");
+
+for(let i=0;i<reveals.length;i++){
+
+let windowHeight = window.innerHeight;
+let elementTop = reveals[i].getBoundingClientRect().top;
+let visiblePoint = 120;
+
+if(elementTop < windowHeight - visiblePoint){
+reveals[i].classList.add("active");
+}
+
+}
+
+}
+
+window.addEventListener("scroll", revealSections);
+
+</script>
+<a href="#contact" class="floating-donate">💚 Donate</a>
+</body>
+</html>
